@@ -93,8 +93,12 @@
   #define PROBE_DDR       DDRC
   #define PROBE_PIN       PINC
   #define PROBE_PORT      PORTC
-  #define PROBE_BIT       5  // Uno Analog Pin 5
+  #define PROBE_BIT       4  // Uno Analog Pin 5
   #define PROBE_MASK      (1<<PROBE_BIT)
+
+  #define BLTOUCH_DDR DDRC
+  #define BLTOUCH_BIT 5
+  #define BLTOUCH_PORT PORTC
 
   #if !defined(ENABLE_DUAL_AXIS)
 

@@ -268,6 +268,12 @@ uint8_t mc_probe_cycle(float *target, plan_line_data_t *pl_data, uint8_t parser_
   sys.probe_succeeded = false; // Re-initialize probe history before beginning cycle.
   probe_configure_invert_mask(is_probe_away);
 
+  #ifdef ENABLE_BLTOUCH
+    bltouch_alarm_off_up();
+    delay_ms(200);
+    bltouch_deploy();
+    delay_ms(200);
+  #endif
   // After syncing, check if probe is already triggered. If so, halt and issue alarm.
   // NOTE: This probe initialization error applies to all probing cycles.
   if ( probe_get_state() ) { // Check probe pin state.
@@ -291,7 +297,10 @@ uint8_t mc_probe_cycle(float *target, plan_line_data_t *pl_data, uint8_t parser_
   } while (sys.state != STATE_IDLE);
 
   // Probing cycle complete!
-
+  #ifdef ENABLE_BLTOUCH
+    bltouch_stow();
+  #endif
+  
   // Set state variables and error out, if the probe failed and cycle with error is enabled.
   if (sys_probe_state == PROBE_ACTIVE) {
     if (is_no_error) { memcpy(sys_probe_position, sys_position, sizeof(sys_position)); }

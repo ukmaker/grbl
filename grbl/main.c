@@ -93,7 +93,10 @@ int main(void)
     probe_init();
     plan_reset(); // Clear block buffer and planner variables
     st_reset(); // Clear stepper subsystem variables.
-
+    
+    bltouch_init();
+    bltouch_self_test();
+   
     // Sync cleared gcode and planner positions to current system position.
     plan_sync_position();
     gc_sync_position();

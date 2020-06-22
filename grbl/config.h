@@ -229,6 +229,8 @@
 // not throw an alarm message.
 #define CHECK_LIMITS_AT_INIT
 
+#define ENABLE_BLTOUCH
+
 // ---------------------------------------------------------------------------------------
 // ADVANCED CONFIGURATION OPTIONS:
 
